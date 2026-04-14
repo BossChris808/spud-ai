@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spud AI — AI Consulting & Implementation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0C0B09;
+    --surface: #161412;
+    --surface-hover: #1e1b17;
+    --text: #F5F0E8;
+    --text-muted: #9B9385;
+    --accent: #E8A838;
+    --accent-dim: #C4872A;
+    --accent-glow: rgba(232, 168, 56, 0.12);
+    --border: rgba(245, 240, 232, 0.08);
+    --radius: 12px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* === GRAIN OVERLAY === */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* === LAYOUT === */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* === NAV === */
+  nav {
+    padding: 28px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bg);
+    transform: rotate(-3deg);
+  }
+
+  .logo-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+  }
+
+  .logo-text span {
+    color: var(--accent);
+  }
+
+  nav a.nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  nav a.nav-link:hover { color: var(--text); }
+
+  /* === HERO === */
+  .hero {
+    padding: 100px 0 80px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(44px, 8vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero p {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .btn-primary:hover {
+    background: #f0b44a;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 32px rgba(232, 168, 56, 0.25);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover {
+    background: var(--surface);
+    border-color: rgba(245, 240, 232, 0.15);
+  }
+
+  /* === WHAT WE DO === */
+  .services {
+    padding: 60px 0 80px;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .services h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+    line-height: 1.2;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    background: var(--surface-hover);
+    border-color: rgba(245, 240, 232, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .card-icon {
+    font-size: 24px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* === FORM SECTION === */
+  .contact {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-inner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px;
+    text-align: center;
+  }
+
+  .contact h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .contact > .contact-inner > p.contact-sub {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 36px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .form-group {
+    text-align: left;
+  }
+
+  .form-group.full {
+    grid-column: 1 / -1;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent-dim);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%239B9385' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+  }
+
+  select option {
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .form-submit {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  /* === DOMAIN NOTICE === */
+  .domain-notice {
+    padding: 40px 0 80px;
+  }
+
+  .domain-notice-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 32px;
+    border: 1px dashed rgba(232, 168, 56, 0.3);
+    border-radius: var(--radius);
+    background: rgba(232, 168, 56, 0.04);
+  }
+
+  .domain-notice-inner p {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .domain-notice-inner p strong {
+    color: var(--text);
+  }
+
+  .domain-notice-inner a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .domain-notice-inner a:hover {
+    color: #f0b44a;
+  }
+
+  /* === FOOTER === */
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 600px) {
+    .hero { padding: 64px 0 56px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-inner { padding: 32px 24px; }
+    .domain-notice-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  /* === FORM SUCCESS STATE === */
+  .form-success {
+    display: none;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .form-success.show {
+    display: block;
+    animation: fadeUp 0.4s ease;
+  }
+
+  .form-success .check {
+    width: 48px;
+    height: 48px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: var(--bg);
+  }
+
+  .form-success h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .form-success p {
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">
+      <div class="logo-icon">S</div>
+      <div class="logo-text">spud<span>ai</span></div>
+    </a>
+    <a href="#contact" class="nav-link">Get in touch &darr;</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Now taking on new clients
+    </div>
+    <h1>AI that actually <em>works</em> for your business</h1>
+    <p>We help teams implement AI agents, coding tools, and automation that ship real results&mdash;not slide decks.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Start a conversation</a>
+      <a href="#services" class="btn btn-ghost">What we do</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-label">What We Do</div>
+    <h2>From &ldquo;we should use AI&rdquo; to<br>actually using AI.</h2>
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-icon">&#9000;</span>
+        <h3>AI Agent Development</h3>
+        <p>Custom agents built on Claude, GPT, and open-source models that handle real workflows end to end.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">&#9881;</span>
+        <h3>Tool & Workflow Setup</h3>
+        <p>Get your team running with Claude Code, Cursor, Copilot, and the tools that actually move the needle.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">&#9733;</span>
+        <h3>AI Strategy</h3>
+        <p>Honest assessment of where AI fits in your business&mdash;and where it doesn&rsquo;t. No hype, no fluff.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">&#9998;</span>
+        <h3>Team Training</h3>
+        <p>Hands-on workshops so your people can prompt, build, and ship with AI tools on their own.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <h2>Let&rsquo;s talk</h2>
+      <p class="contact-sub">Tell us what you&rsquo;re working on. We&rsquo;ll get back to you within 24 hours.</p>
+
+      <form id="contactForm" action="https://formspree.io/f/meevqrjd" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Email" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" name="company" placeholder="Company (optional)">
+          </div>
+          <div class="form-group">
+            <select name="interest" required>
+              <option value="" disabled selected>What are you looking for?</option>
+              <option value="agents">AI Agent Development</option>
+              <option value="tools">Tool & Workflow Setup</option>
+              <option value="strategy">AI Strategy</option>
+              <option value="training">Team Training</option>
+              <option value="other">Something else</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <textarea name="message" placeholder="Tell us a bit about your project or challenge..." rows="4"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">Send message</button>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="check">&#10003;</div>
+        <h3>Message received</h3>
+        <p>We&rsquo;ll be in touch shortly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOMAIN NOTICE -->
+  <section class="domain-notice">
+    <div class="domain-notice-inner">
+      <p><strong>spudai.com</strong> &mdash; This domain is also available for acquisition. Serious inquiries welcome.</p>
+      <a href="#contact">Make an offer &rarr;</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Spud AI. All rights reserved.</p>
+  </footer>
+</div>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  // Replace this with your actual form handler (Squarespace form block, Formspree, etc.)
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('show');
+}
+</script>
+
+</body>
+</html>
