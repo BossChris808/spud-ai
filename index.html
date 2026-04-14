@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spud AI — AI Consulting & Implementation</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='34' rx='22' ry='26' fill='%23E8A838' transform='rotate(-12 32 34)'/%3E%3Cellipse cx='32' cy='34' rx='18' ry='22' fill='%23D4952E' transform='rotate(-12 32 34)' opacity='0.3'/%3E%3Ccircle cx='24' cy='24' r='2.5' fill='%23C4872A' opacity='0.6'/%3E%3Ccircle cx='38' cy='20' r='2' fill='%23C4872A' opacity='0.5'/%3E%3Ccircle cx='42' cy='34' r='2' fill='%23C4872A' opacity='0.4'/%3E%3Ccircle cx='22' cy='40' r='1.8' fill='%23C4872A' opacity='0.5'/%3E%3Ccircle cx='34' cy='48' r='1.5' fill='%23C4872A' opacity='0.4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -586,12 +587,30 @@
 </div>
 
 <script>
-function handleSubmit(e) {
+document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  // Replace this with your actual form handler (Squarespace form block, Formspree, etc.)
-  document.getElementById('contactForm').style.display = 'none';
-  document.getElementById('formSuccess').classList.add('show');
-}
+  var form = this;
+  var btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  }).then(function(res) {
+    if (res.ok) {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+    } else {
+      btn.textContent = 'Something went wrong — try again';
+      btn.disabled = false;
+    }
+  }).catch(function() {
+    btn.textContent = 'Something went wrong — try again';
+    btn.disabled = false;
+  });
+});
 </script>
 
 </body>
