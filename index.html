@@ -11,7 +11,7 @@
   gtag('js', new Date());
   gtag('config', 'G-GCJ3WDB00F');
 </script>
-<title>Spud AI — AI Consulting & Implementation</title>
+<title>Spud AI — We Build Custom AI Tools for Your Business</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='34' rx='22' ry='26' fill='%23E8A838' transform='rotate(-12 32 34)'/%3E%3Cellipse cx='32' cy='34' rx='18' ry='22' fill='%23D4952E' transform='rotate(-12 32 34)' opacity='0.3'/%3E%3Ccircle cx='24' cy='24' r='2.5' fill='%23C4872A' opacity='0.6'/%3E%3Ccircle cx='38' cy='20' r='2' fill='%23C4872A' opacity='0.5'/%3E%3Ccircle cx='42' cy='34' r='2' fill='%23C4872A' opacity='0.4'/%3E%3Ccircle cx='22' cy='40' r='1.8' fill='%23C4872A' opacity='0.5'/%3E%3Ccircle cx='34' cy='48' r='1.5' fill='%23C4872A' opacity='0.4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -42,7 +42,6 @@
     overflow-x: hidden;
   }
 
-  /* === GRAIN OVERLAY === */
   body::before {
     content: '';
     position: fixed;
@@ -53,7 +52,6 @@
     z-index: 9999;
   }
 
-  /* === LAYOUT === */
   .container {
     max-width: 720px;
     margin: 0 auto;
@@ -96,9 +94,7 @@
     letter-spacing: -0.02em;
   }
 
-  .logo-text span {
-    color: var(--accent);
-  }
+  .logo-text span { color: var(--accent); }
 
   nav a.nav-link {
     color: var(--text-muted);
@@ -169,7 +165,7 @@
   .hero p {
     font-size: 18px;
     color: var(--text-muted);
-    max-width: 480px;
+    max-width: 500px;
     margin: 0 auto 48px;
     line-height: 1.7;
     animation: fadeUp 0.6s ease 0.2s both;
@@ -220,7 +216,7 @@
     border-color: rgba(245, 240, 232, 0.15);
   }
 
-  /* === WHAT WE DO === */
+  /* === WHAT WE BUILD === */
   .services {
     padding: 60px 0 80px;
   }
@@ -239,8 +235,16 @@
     font-size: 32px;
     font-weight: 400;
     letter-spacing: -0.02em;
-    margin-bottom: 48px;
+    margin-bottom: 20px;
     line-height: 1.2;
+  }
+
+  .services > p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 48px;
+    max-width: 560px;
   }
 
   .card-grid {
@@ -281,6 +285,48 @@
     line-height: 1.6;
   }
 
+  /* === HOW IT WORKS === */
+  .process {
+    padding: 60px 0 80px;
+    border-top: 1px solid var(--border);
+  }
+
+  .process h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+    line-height: 1.2;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+  }
+
+  .step-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+    opacity: 0.6;
+  }
+
+  .step h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .step p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
   /* === FORM SECTION === */
   .contact {
     padding: 80px 0;
@@ -316,13 +362,8 @@
     margin-bottom: 12px;
   }
 
-  .form-group {
-    text-align: left;
-  }
-
-  .form-group.full {
-    grid-column: 1 / -1;
-  }
+  .form-group { text-align: left; }
+  .form-group.full { grid-column: 1 / -1; }
 
   input, textarea, select {
     width: 100%;
@@ -346,10 +387,7 @@
     border-color: var(--accent-dim);
   }
 
-  textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
+  textarea { resize: vertical; min-height: 100px; }
 
   select {
     appearance: none;
@@ -364,15 +402,10 @@
     color: var(--text);
   }
 
-  .form-submit {
-    margin-top: 20px;
-    width: 100%;
-  }
+  .form-submit { margin-top: 20px; width: 100%; }
 
   /* === DOMAIN NOTICE === */
-  .domain-notice {
-    padding: 40px 0 80px;
-  }
+  .domain-notice { padding: 40px 0 80px; }
 
   .domain-notice-inner {
     display: flex;
@@ -390,9 +423,7 @@
     color: var(--text-muted);
   }
 
-  .domain-notice-inner p strong {
-    color: var(--text);
-  }
+  .domain-notice-inner p strong { color: var(--text); }
 
   .domain-notice-inner a {
     color: var(--accent);
@@ -403,9 +434,7 @@
     transition: color 0.2s;
   }
 
-  .domain-notice-inner a:hover {
-    color: #f0b44a;
-  }
+  .domain-notice-inner a:hover { color: #f0b44a; }
 
   /* === FOOTER === */
   footer {
@@ -435,6 +464,7 @@
   @media (max-width: 600px) {
     .hero { padding: 64px 0 56px; }
     .card-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; gap: 24px; }
     .form-row { grid-template-columns: 1fr; }
     .contact-inner { padding: 32px 24px; }
     .domain-notice-inner {
@@ -443,7 +473,6 @@
     }
   }
 
-  /* === FORM SUCCESS STATE === */
   .form-success {
     display: none;
     padding: 40px 20px;
@@ -497,40 +526,64 @@
   <section class="hero">
     <div class="badge">
       <span class="badge-dot"></span>
-      Now taking on new clients
+      Now taking on new projects
     </div>
-    <h1>AI that actually <em>works</em> for your business</h1>
-    <p>We help teams implement AI agents, coding tools, and automation that ship real results&mdash;not slide decks.</p>
+    <h1>We build custom <em>AI tools</em> for your business</h1>
+    <p>Every company knows they should be using AI. Most don&rsquo;t know where to start. We build the tools that get you there.</p>
     <div class="hero-cta">
-      <a href="#contact" class="btn btn-primary">Start a conversation</a>
-      <a href="#services" class="btn btn-ghost">What we do</a>
+      <a href="#contact" class="btn btn-primary">Tell us what you need</a>
+      <a href="#services" class="btn btn-ghost">How it works</a>
     </div>
   </section>
 
-  <!-- SERVICES -->
+  <!-- WHAT WE BUILD -->
   <section class="services" id="services">
-    <div class="section-label">What We Do</div>
-    <h2>From &ldquo;we should use AI&rdquo; to<br>actually using AI.</h2>
+    <div class="section-label">What We Build</div>
+    <h2>Your idea. Your workflow.<br>Built with AI.</h2>
+    <p>You tell us what&rsquo;s slowing your team down or what you wish existed. We build it&mdash;fast, functional, and tailored to how your business actually works.</p>
     <div class="card-grid">
       <div class="card">
-        <span class="card-icon">&#9000;</span>
-        <h3>AI Agent Development</h3>
-        <p>Custom agents built on Claude, GPT, and open-source models that handle real workflows end to end.</p>
+        <span class="card-icon">&#128172;</span>
+        <h3>AI Chatbots & Assistants</h3>
+        <p>Custom chatbots trained on your business&mdash;handling customer questions, qualifying leads, and working 24/7 so your team doesn&rsquo;t have to.</p>
       </div>
       <div class="card">
         <span class="card-icon">&#9881;</span>
-        <h3>Tool & Workflow Setup</h3>
-        <p>Get your team running with Claude Code, Cursor, Copilot, and the tools that actually move the needle.</p>
+        <h3>AI-Powered Workflows</h3>
+        <p>Smart tools that use AI to handle the repetitive work&mdash;data entry, document processing, email drafting, and more.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">&#9000;</span>
+        <h3>Internal Tools</h3>
+        <p>Dashboards, automations, and custom apps that replace the spreadsheets and manual processes holding your team back.</p>
       </div>
       <div class="card">
         <span class="card-icon">&#9733;</span>
-        <h3>AI Strategy</h3>
-        <p>Honest assessment of where AI fits in your business&mdash;and where it doesn&rsquo;t. No hype, no fluff.</p>
+        <h3>Customer-Facing Tools</h3>
+        <p>Intake forms, portals, and self-service tools that give your customers a better experience while saving your team time.</p>
       </div>
-      <div class="card">
-        <span class="card-icon">&#9998;</span>
-        <h3>Team Training</h3>
-        <p>Hands-on workshops so your people can prompt, build, and ship with AI tools on their own.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="process">
+    <div class="section-label">The Process</div>
+    <h2>From conversation to working tool.</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-number">01</span>
+        <h3>Tell us the problem</h3>
+        <p>A quick conversation about what&rsquo;s not working, what you wish existed, or where your team is wasting time.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">02</span>
+        <h3>We build it</h3>
+        <p>We design and develop your tool fast&mdash;usually in days, not months. You see progress early and give feedback along the way.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">03</span>
+        <h3>You use it</h3>
+        <p>A working tool your team actually uses, with support to make sure it sticks. No shelf-ware, no 50-page strategy deck.</p>
       </div>
     </div>
   </section>
@@ -538,7 +591,7 @@
   <!-- CONTACT FORM -->
   <section class="contact" id="contact">
     <div class="contact-inner">
-      <h2>Let&rsquo;s talk</h2>
+      <h2>Let&rsquo;s build something</h2>
       <p class="contact-sub">Tell us what you&rsquo;re working on. We&rsquo;ll get back to you within 24 hours.</p>
 
       <form id="contactForm" action="https://formspree.io/f/meevqrjd" method="POST">
@@ -556,18 +609,19 @@
           </div>
           <div class="form-group">
             <select name="interest" required>
-              <option value="" disabled selected>What are you looking for?</option>
-              <option value="agents">AI Agent Development</option>
-              <option value="tools">Tool & Workflow Setup</option>
-              <option value="strategy">AI Strategy</option>
-              <option value="training">Team Training</option>
+              <option value="" disabled selected>What do you need?</option>
+              <option value="chatbot">AI chatbot or assistant</option>
+              <option value="ai-workflow">AI-powered workflow</option>
+              <option value="internal-tool">Internal tool or dashboard</option>
+              <option value="customer-facing">Customer-facing tool</option>
+              <option value="not-sure">Not sure yet &mdash; need guidance</option>
               <option value="other">Something else</option>
             </select>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group full">
-            <textarea name="message" placeholder="Tell us a bit about your project or challenge..." rows="4"></textarea>
+            <textarea name="message" placeholder="What's the problem you're trying to solve? What do you wish you had?" rows="4"></textarea>
           </div>
         </div>
         <button type="submit" class="btn btn-primary form-submit">Send message</button>
