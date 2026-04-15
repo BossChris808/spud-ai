@@ -675,5 +675,16 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 });
 </script>
 
+<!-- Spuddy — SpudAI's AI concierge. Custom chat widget served from the
+     Cloudflare Worker at concierge.spudai.com. Silently no-ops until the
+     worker + DNS are set up. -->
+<script
+  src="https://concierge.spudai.com/widget.js"
+  data-api="https://concierge.spudai.com/api"
+  data-tenant="spudai"
+  data-contact="#contact"
+  async
+></script>
+
 </body>
 </html>
